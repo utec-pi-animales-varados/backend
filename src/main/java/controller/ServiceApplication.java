@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @SpringBootApplication
-@ComponentScan({"controller" })
+@ComponentScan({"controller", "business" })
 @EntityScan("data")
 @EnableJpaRepositories("data.repositories")
 public class ServiceApplication implements WebMvcConfigurer {
