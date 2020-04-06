@@ -18,7 +18,7 @@ public class Animal implements Serializable {
     private String color;
 
     @Column
-    private double peso;
+    private Double peso;
 
     public Animal(String name, String color, double peso) {
         this.name = name;
@@ -26,6 +26,8 @@ public class Animal implements Serializable {
         this.peso = peso;
     }
 
+    public Animal() {
+    }
 
     public Long getId() {
         return id;

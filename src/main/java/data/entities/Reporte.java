@@ -1,11 +1,15 @@
 package data.entities;
 
-import jdk.jfr.Relational;
-import org.springframework.data.mapping.PersistentEntity;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Column;
 
-import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Time;
+import java.sql.Date;
 
 @Entity
 @Table(name = "reporte")
@@ -22,24 +26,31 @@ public class Reporte implements Serializable {
     private Animal animal;
 
     @Column
-    private Time time;
+    private Date date;
 
     @Column
-    private String coordinates;
+    private Double lat;
 
     @Column
-    private String pictureURL;
+    private Double lon;
+
+    @Column
+    private String urlPicture;
 
     @Column
     private String comment;
 
-    public Reporte(Usuario user, Animal animal, Time time, String coordinates, String pictureURL, String comment) {
+    public Reporte(Usuario user, Animal animal, Date date, Double lat, Double lon, String urlPicture, String comment) {
         this.user = user;
         this.animal = animal;
-        this.time = time;
-        this.coordinates = coordinates;
-        this.pictureURL = pictureURL;
+        this.date = date;
+        this.lat = lat;
+        this.lon = lon;
+        this.urlPicture = urlPicture;
         this.comment = comment;
+    }
+
+    public Reporte() {
     }
 
     public Long getId() {
@@ -66,28 +77,36 @@ public class Reporte implements Serializable {
         this.animal = animal;
     }
 
-    public Time getTime() {
-        return time;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public String getCoordinates() {
-        return coordinates;
+    public Double getLat() {
+        return lat;
     }
 
-    public void setCoordinates(String coordinates) {
-        this.coordinates = coordinates;
+    public void setLat(Double lat) {
+        this.lat = lat;
     }
 
-    public String getPictureURL() {
-        return pictureURL;
+    public Double getLon() {
+        return lon;
     }
 
-    public void setPictureURL(String pictureURL) {
-        this.pictureURL = pictureURL;
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
+
+    public String getUrlPicture() {
+        return urlPicture;
+    }
+
+    public void setUrlPicture(String urlPicture) {
+        this.urlPicture = urlPicture;
     }
 
     public String getComment() {
