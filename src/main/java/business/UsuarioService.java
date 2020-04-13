@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -16,6 +17,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
+/*
     public List<Usuario> findAll(){
         List<Usuario> items = new ArrayList<>();
         for(Usuario item : repository.findAll()){
@@ -24,8 +26,8 @@ public class UsuarioService {
         return items;
     }
 
-    public Usuario findOne(Long id){
-        return repository.findById(id).get();
+    public Optional<Usuario> findOne(Long id){
+        return repository.findById(id);
     }
 
     public Usuario create(Usuario item){
@@ -39,6 +41,7 @@ public class UsuarioService {
     public void delete(Long id){
         repository.deleteById(id);
     }
+*/
 
 
 }
