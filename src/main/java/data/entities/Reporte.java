@@ -1,13 +1,12 @@
 package data.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Column;
-
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Date;
 
@@ -29,10 +28,10 @@ public class Reporte implements Serializable {
     private Date date;
 
     @Column
-    private Double lat;
+    private Double latitude;
 
     @Column
-    private Double lon;
+    private Double longitude;
 
     @Column
     private String urlPicture;
@@ -40,12 +39,12 @@ public class Reporte implements Serializable {
     @Column
     private String comment;
 
-    public Reporte(Usuario user, Animal animal, Date date, Double lat, Double lon, String urlPicture, String comment) {
+    public Reporte(Usuario user, Animal animal, Date date, Double latitude, Double longitude, String urlPicture, String comment) {
         this.user = user;
         this.animal = animal;
         this.date = date;
-        this.lat = lat;
-        this.lon = lon;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.urlPicture = urlPicture;
         this.comment = comment;
     }
@@ -85,20 +84,20 @@ public class Reporte implements Serializable {
         this.date = date;
     }
 
-    public Double getLat() {
-        return lat;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setLat(Double lat) {
-        this.lat = lat;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public Double getLon() {
-        return lon;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLon(Double lon) {
-        this.lon = lon;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public String getUrlPicture() {

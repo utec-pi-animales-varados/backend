@@ -1,7 +1,17 @@
 package data.entities;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table (name = "animal")
@@ -10,6 +20,10 @@ public class Animal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Reporte.class)
+    @JoinColumn(name = "id_report")
+    private Set<Reporte> reports = new HashSet<>();
 
     @Column
     private String name;
@@ -20,7 +34,8 @@ public class Animal implements Serializable {
     @Column
     private Double peso;
 
-    public Animal(String name, String color, double peso) {
+    public Animal(Set<Reporte> reports, String name, String color, double peso) {
+        this.reports = reports;
         this.name = name;
         this.color = color;
         this.peso = peso;
@@ -35,6 +50,14 @@ public class Animal implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Set<Reporte> getReports() {
+        return reports;
+    }
+
+    public void setReports(Set<Reporte> reports) {
+        this.reports = reports;
     }
 
     public String getName() {
@@ -57,7 +80,7 @@ public class Animal implements Serializable {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(Double peso) {
         this.peso = peso;
     }
 }
