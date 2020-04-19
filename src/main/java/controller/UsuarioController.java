@@ -33,6 +33,4 @@ public class UsuarioController {
         return service.findAll();
     }
 
-
-
 }
