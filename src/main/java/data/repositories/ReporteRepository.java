@@ -1,8 +1,8 @@
 package data.repositories;
 
 import data.entities.Reporte;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReporteRepository extends CrudRepository<Reporte, Long> {
+public interface ReporteRepository extends JpaRepository<Reporte, Long> {
 
 }
