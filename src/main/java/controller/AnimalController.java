@@ -18,12 +18,6 @@ public class AnimalController {
     @Autowired
     private AnimalService service;
 
-//    private final AnimalRepository repository;
-//
-//    AnimalController(AnimalRepository repository) {
-//        this.repository = repository;
-//    }
-
     //CRUD  CREATE (POST) , READ (GET), UPDATE (PUT), DELETE (DELETE)
     @GetMapping
     public List<Animal> readAll(){
