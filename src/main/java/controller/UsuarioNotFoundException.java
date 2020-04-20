@@ -2,7 +2,7 @@ package controller;
 
 public class UsuarioNotFoundException extends RuntimeException{
 
-    UsuarioNotFoundException(Long id){
+    public UsuarioNotFoundException(Long id){
         super("Could not find the user " + id);
     }
 }
