@@ -25,15 +25,24 @@ public class AnimalService {
     }
 
     public Animal findOne(Long id){
-        return repository.findById(id).get();
+        return repository.findById(id).orElseThrow(() -> new AnimalNotFoundException(id));
     }
 
     public Animal create(Animal item){
         return repository.save(item);
     }
 
-    public Animal update(Animal item){
-        return repository.save(item);
+    public Animal update(Animal newAnimal, Long id){
+        return repository.findById(id).map(animal -> {
+            animal.setName(newAnimal.getName());
+            animal.setColor(newAnimal.getColor());
+            animal.setPeso(newAnimal.getPeso());
+            animal.setReports(newAnimal.getReports());
+            return repository.save(animal);
+        }).orElseGet(()->{
+            newAnimal.setId(id);
+            return repository.save(newAnimal);
+        });
     }
 
     public void delete(Long id){
