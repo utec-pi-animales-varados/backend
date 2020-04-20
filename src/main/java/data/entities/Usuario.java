@@ -1,5 +1,7 @@
 package data.entities;
 
+import com.google.common.hash.Hashing;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -101,7 +104,7 @@ public class Usuario implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
     }
 
     public String getTelephone() {
@@ -119,4 +122,10 @@ public class Usuario implements Serializable {
     public void setMobilePhone(String mobilePhone) {
         this.mobilePhone = mobilePhone;
     }
+
+    public boolean verifyPassword(String password){
+        return this.password.equals(Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString());
+    }
+
+
 }
