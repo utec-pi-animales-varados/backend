@@ -1,14 +1,10 @@
 package data.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "reporte")
@@ -17,6 +13,10 @@ public class Reporte implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = PreguntaYRespuesta.class)
+    @JoinColumn(name = "id_preguntayrespuesta")
+    private Set<PreguntaYRespuesta> preguntasYRespuestasSet = new HashSet<>();
 
     @ManyToOne
     private Usuario user;

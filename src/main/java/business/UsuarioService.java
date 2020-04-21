@@ -1,6 +1,5 @@
 package business;
 
-import controller.UsuarioNotFoundException;
 import data.entities.Usuario;
 import data.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

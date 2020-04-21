@@ -1,4 +1,4 @@
-package controller;
+package business;
 
 public class UsuarioNotFoundException extends RuntimeException{
 
