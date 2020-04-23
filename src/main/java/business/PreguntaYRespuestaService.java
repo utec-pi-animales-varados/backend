@@ -31,6 +31,7 @@ public class PreguntaYRespuestaService {
         return repository.findById(id).map(preguntaYRespuesta -> {
             preguntaYRespuesta.setAnswer(newPreguntaYRespuesta.getAnswer());
             preguntaYRespuesta.setReport(newPreguntaYRespuesta.getReport());
+            preguntaYRespuesta.setPregunta(newPreguntaYRespuesta.getPregunta());
             return repository.save(preguntaYRespuesta);
         }).orElseGet(()->{
             newPreguntaYRespuesta.setId(id);

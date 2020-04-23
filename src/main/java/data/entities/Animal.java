@@ -21,9 +21,10 @@ public class Animal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Reporte.class)
-    @JoinColumn(name = "id_report")
-    private Set<Reporte> reports = new HashSet<>();
+    //@OneToMany(cascade = CascadeType.ALL, targetEntity = Reporte.class)
+    //@JoinColumn(name = "id_report")
+    //@OneToMany(mappedBy = "animal")
+    //private Set<Reporte> reporte = new HashSet<>();
 
     @Column
     private String name;
@@ -34,8 +35,8 @@ public class Animal implements Serializable {
     @Column
     private Double peso;
 
-    public Animal(Set<Reporte> reports, String name, String color, double peso) {
-        this.reports = reports;
+    public Animal(Set<Reporte> reporte, String name, String color, double peso) {
+        //this.reporte = reporte;
         this.name = name;
         this.color = color;
         this.peso = peso;
@@ -52,13 +53,13 @@ public class Animal implements Serializable {
         this.id = id;
     }
 
-    public Set<Reporte> getReports() {
-        return reports;
+    /*public Set<Reporte> getReports() {
+        return reporte;
     }
 
     public void setReports(Set<Reporte> reports) {
-        this.reports = reports;
-    }
+        this.reporte = reports;
+    }*/
 
     public String getName() {
         return name;

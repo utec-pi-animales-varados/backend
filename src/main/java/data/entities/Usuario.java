@@ -24,9 +24,10 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Reporte.class)
-    @JoinColumn(name = "id_report")
-    private Set<Reporte> reports = new HashSet<>();
+    //@OneToMany(cascade = CascadeType.ALL, targetEntity = Reporte.class)
+    //@JoinColumn(name = "id_report")
+    //@OneToMany(mappedBy = "usuario")
+    //private Set<Reporte> reporte = new HashSet<>();
 
     @Column
     private String name;
@@ -49,8 +50,8 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(Set<Reporte> reports, String name, String lastName, String email, String password, String telephone, String mobilePhone) {
-        this.reports = reports;
+    public Usuario(Set<Reporte> reporte, String name, String lastName, String email, String password, String telephone, String mobilePhone) {
+        //this.reporte = reporte;
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -67,13 +68,13 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public Set<Reporte> getReports() {
-        return reports;
+    /*public Set<Reporte> getReports() {
+        return reporte;
     }
 
     public void setReports(Set<Reporte> reports) {
-        this.reports = reports;
-    }
+        this.reporte = reports;
+    }*/
 
     public String getName() {
         return name;

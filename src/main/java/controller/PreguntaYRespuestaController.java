@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/preguntasyrespuestas")
+@RequestMapping("/pyq")
 public class PreguntaYRespuestaController {
 
     @Autowired

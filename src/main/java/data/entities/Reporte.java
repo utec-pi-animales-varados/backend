@@ -14,15 +14,17 @@ public class Reporte implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = PreguntaYRespuesta.class)
-    @JoinColumn(name = "id_preguntayrespuesta")
-    private Set<PreguntaYRespuesta> preguntasYRespuestasSet = new HashSet<>();
+    //@OneToMany(cascade = CascadeType.ALL, targetEntity = PreguntaYRespuesta.class)
+    @OneToMany(mappedBy = "reporte")
+    private Set<PreguntaYRespuesta> preguntaYRespuesta = new HashSet<>();
 
-    @ManyToOne
-    private Usuario user;
-
-    @ManyToOne
+    /*@ManyToOne
+    @JoinColumn(name="animal_id", nullable=true)
     private Animal animal;
+
+    @ManyToOne
+    @JoinColumn(name="usuario_id", nullable=true)
+    private Usuario usuario;*/
 
     @Column
     private Date date;
@@ -39,9 +41,10 @@ public class Reporte implements Serializable {
     @Column
     private String comment;
 
-    public Reporte(Usuario user, Animal animal, Date date, Double latitude, Double longitude, String urlPicture, String comment) {
-        this.user = user;
-        this.animal = animal;
+    public Reporte(Set<PreguntaYRespuesta> preguntasYRespuestasSet, Animal animal, Usuario user, Date date, Double latitude, Double longitude, String urlPicture, String comment) {
+        this.preguntaYRespuesta = preguntasYRespuestasSet;
+        //this.animal = animal;
+        //this.usuario = user;
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -52,6 +55,14 @@ public class Reporte implements Serializable {
     public Reporte() {
     }
 
+    public Set<PreguntaYRespuesta> getPreguntasYRespuestasSet() {
+        return preguntaYRespuesta;
+    }
+
+    public void setPreguntasYRespuestasSet(Set<PreguntaYRespuesta> preguntasYRespuestasSet) {
+        this.preguntaYRespuesta = preguntasYRespuestasSet;
+    }
+
     public Long getId() {
         return id;
     }
@@ -60,12 +71,12 @@ public class Reporte implements Serializable {
         this.id = id;
     }
 
-    public Usuario getUser() {
-        return user;
+    /*public Usuario getUser() {
+        return usuario;
     }
 
     public void setUser(Usuario user) {
-        this.user = user;
+        this.usuario = user;
     }
 
     public Animal getAnimal() {
@@ -74,7 +85,7 @@ public class Reporte implements Serializable {
 
     public void setAnimal(Animal animal) {
         this.animal = animal;
-    }
+    }*/
 
     public Date getDate() {
         return date;

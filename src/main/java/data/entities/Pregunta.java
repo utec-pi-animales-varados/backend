@@ -15,7 +15,7 @@ public class Pregunta implements Serializable {
     private String questionText;
 
     @OneToOne(mappedBy = "pregunta")
-    private PreguntaYRespuesta preguntaYRespuesta;
+    private  PreguntaYRespuesta preguntaYRespuesta;
 
     public Pregunta() {
     }

@@ -37,7 +37,7 @@ public class AnimalService {
             animal.setName(newAnimal.getName());
             animal.setColor(newAnimal.getColor());
             animal.setPeso(newAnimal.getPeso());
-            animal.setReports(newAnimal.getReports());
+            //animal.setReports(newAnimal.getReports());
             return repository.save(animal);
         }).orElseGet(()->{
             newAnimal.setId(id);

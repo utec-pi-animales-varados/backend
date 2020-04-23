@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table (name = "preguntayrespuesta")
+@Table (name = "pyq")
 public class PreguntaYRespuesta implements Serializable {
 
     @Id
@@ -15,7 +15,8 @@ public class PreguntaYRespuesta implements Serializable {
     private String answer;
 
     @ManyToOne
-    private Reporte report;
+    @JoinColumn(name="reporte_id", nullable=true)
+    private Reporte reporte;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pregunta_id", referencedColumnName = "id")
@@ -26,7 +27,15 @@ public class PreguntaYRespuesta implements Serializable {
 
     public PreguntaYRespuesta(String answer, Reporte report, Pregunta pregunta) {
         this.answer = answer;
-        this.report = report;
+        this.reporte = report;
+        this.pregunta = pregunta;
+    }
+
+    public Pregunta getPregunta() {
+        return pregunta;
+    }
+
+    public void setPregunta(Pregunta pregunta) {
         this.pregunta = pregunta;
     }
 
@@ -39,7 +48,7 @@ public class PreguntaYRespuesta implements Serializable {
     }
 
     public void setReport(Reporte report) {
-        this.report = report;
+        this.reporte = report;
     }
 
     public Long getId() {
@@ -51,6 +60,6 @@ public class PreguntaYRespuesta implements Serializable {
     }
 
     public Reporte getReport() {
-        return report;
+        return reporte;
     }
 }
