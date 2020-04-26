@@ -1,62 +1,54 @@
 package data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.hash.Hashing;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table( name="usuario")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Usuario implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Reporte.class)
-    @JoinColumn(name = "id_report")
-    private Set<Reporte> reports = new HashSet<>();
-
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private String lastName;
 
-    @Column
+    @Column(nullable = false)
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
-    @Column
     private String telephone;
 
-    @Column
     private String mobilePhone;
 
-    public Usuario() {
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Reporte> reportes;
 
-    public Usuario(Set<Reporte> reports, String name, String lastName, String email, String password, String telephone, String mobilePhone) {
-        this.reports = reports;
-        this.name = name;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.telephone = telephone;
-        this.mobilePhone = mobilePhone;
+    public Usuario() {
     }
 
     public Long getId() {
@@ -65,14 +57,6 @@ public class Usuario implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<Reporte> getReports() {
-        return reports;
-    }
-
-    public void setReports(Set<Reporte> reports) {
-        this.reports = reports;
     }
 
     public String getName() {
@@ -127,5 +111,11 @@ public class Usuario implements Serializable {
         return this.password.equals(Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString());
     }
 
+    public Set<Reporte> getReportes() {
+        return reportes;
+    }
 
+    public void setReportes(Set<Reporte> reportes) {
+        this.reportes = reportes;
+    }
 }

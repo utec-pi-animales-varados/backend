@@ -1,29 +1,30 @@
 package data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table (name = "animal")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Animal implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Reporte.class)
-    @JoinColumn(name = "id_report")
-    private Set<Reporte> reports = new HashSet<>();
 
     @Column
     private String name;
@@ -34,12 +35,9 @@ public class Animal implements Serializable {
     @Column
     private Double peso;
 
-    public Animal(Set<Reporte> reports, String name, String color, double peso) {
-        this.reports = reports;
-        this.name = name;
-        this.color = color;
-        this.peso = peso;
-    }
+    @JsonIgnore
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Reporte> reportes;
 
     public Animal() {
     }
@@ -50,14 +48,6 @@ public class Animal implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<Reporte> getReports() {
-        return reports;
-    }
-
-    public void setReports(Set<Reporte> reports) {
-        this.reports = reports;
     }
 
     public String getName() {
@@ -83,4 +73,13 @@ public class Animal implements Serializable {
     public void setPeso(Double peso) {
         this.peso = peso;
     }
+
+    public Set<Reporte> getReportes() {
+        return reportes;
+    }
+
+    public void setReportes(Set<Reporte> reportes) {
+        this.reportes = reportes;
+    }
+
 }
