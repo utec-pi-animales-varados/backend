@@ -1,10 +1,14 @@
 package data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -14,43 +18,36 @@ import java.sql.Date;
 @Table(name = "reporte")
 public class Reporte implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Usuario user;
-
-    @ManyToOne
-    private Animal animal;
-
-    @Column
+    @Column(nullable = false)
     private Date date;
 
-    @Column
+    @Column(nullable = false)
     private Double latitude;
 
-    @Column
+    @Column(nullable = false)
     private Double longitude;
 
-    @Column
+    @Column(nullable = false)
     private String urlPicture;
 
     @Column
     private String comment;
 
-    public Reporte(Usuario user, Animal animal, Date date, Double latitude, Double longitude, String urlPicture, String comment) {
-        this.user = user;
-        this.animal = animal;
-        this.date = date;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.urlPicture = urlPicture;
-        this.comment = comment;
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuarioId", nullable = false)
+    private Usuario usuario;
 
-    public Reporte() {
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "animalId", nullable = false)
+    private Animal animal;
+
+    public Reporte() {}
 
     public Long getId() {
         return id;
@@ -58,22 +55,6 @@ public class Reporte implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
-
-    public Animal getAnimal() {
-        return animal;
-    }
-
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
     }
 
     public Date getDate() {
@@ -115,4 +96,21 @@ public class Reporte implements Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
 }

@@ -40,7 +40,7 @@ public class ReporteService {
             reporte.setLatitude(item.getLatitude());
             reporte.setLongitude(item.getLongitude());
             reporte.setUrlPicture(item.getUrlPicture());
-            reporte.setUser(item.getUser());
+            reporte.setUsuario(item.getUsuario());
             return repository.save(reporte);
         }).orElseGet(()->{
             item.setId(id);

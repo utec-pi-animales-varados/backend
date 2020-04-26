@@ -34,7 +34,7 @@ public class UsuarioService {
             usuario.setLastName(newUsuario.getLastName());
             usuario.setEmail(newUsuario.getEmail());
             usuario.setPassword(newUsuario.getPassword());
-            usuario.setReports(newUsuario.getReports());
+            usuario.setReportes(newUsuario.getReportes());
             usuario.setTelephone(newUsuario.getTelephone());
             usuario.setMobilePhone(newUsuario.getMobilePhone());
             return repository.save(usuario);
