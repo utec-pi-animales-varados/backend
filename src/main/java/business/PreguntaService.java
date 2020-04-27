@@ -29,7 +29,8 @@ public class PreguntaService {
 
     public Pregunta update(Pregunta newPregunta, Long id) {
         return repository.findById(id).map(pregunta -> {
-            pregunta.setQuestionText(newPregunta.getQuestionText());
+            pregunta.setTexto(newPregunta.getTexto());
+            pregunta.setRespuestas(newPregunta.getRespuestas());
             return repository.save(pregunta);
         }).orElseGet(() -> {
             newPregunta.setId(id);
