@@ -84,12 +84,4 @@ public class Animal implements Serializable {
         this.peso = peso;
     }
 
-    public Set<Reporte> getReportes() {
-        return reportes;
-    }
-
-    public void setReportes(Set<Reporte> reportes) {
-        this.reportes = reportes;
-    }
-
 }

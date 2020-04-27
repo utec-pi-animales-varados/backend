@@ -57,14 +57,6 @@ public class Usuario implements Serializable {
         this.reportes = reportes;
     }
 
-    public Set<Reporte> getReportes() {
-        return reportes;
-    }
-
-    public void setReportes(Set<Reporte> reportes) {
-        this.reportes = reportes;
-    }
-
     public Long getId() {
         return id;
     }
