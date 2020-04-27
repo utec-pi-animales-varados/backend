@@ -34,13 +34,14 @@ public class ReporteService {
 
     public Reporte update(Reporte item, Long id){
         return repository.findById(id).map(reporte -> {
-            reporte.setAnimal(item.getAnimal());
             reporte.setComment(item.getComment());
             reporte.setDate(item.getDate());
             reporte.setLatitude(item.getLatitude());
             reporte.setLongitude(item.getLongitude());
             reporte.setUrlPicture(item.getUrlPicture());
-            reporte.setUser(item.getUser());
+            reporte.setAnimal(item.getAnimal());
+            reporte.setUsuario(item.getUsuario());
+            reporte.setRespuestas(item.getRespuestas());
             return repository.save(reporte);
         }).orElseGet(()->{
             item.setId(id);
