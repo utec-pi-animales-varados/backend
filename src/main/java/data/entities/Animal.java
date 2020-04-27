@@ -31,7 +31,6 @@ public class Animal implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
     private Set<Reporte>  reportes = new HashSet<>();
 
     public Animal() {

@@ -1,10 +1,15 @@
 package data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table (name = "respuesta")
+@JsonIgnoreProperties({"hibernateLazyInitialize", "handler"})
 public class Respuesta implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -16,6 +21,7 @@ public class Respuesta implements Serializable{
     @Column
     private String textoRespuesta;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reporte_id")
     private Reporte reporte;
@@ -33,6 +39,7 @@ public class Respuesta implements Serializable{
     public Respuesta() {
     }
 
+    @JsonIgnore
     public Reporte getReporte() {
         return reporte;
     }
@@ -41,6 +48,7 @@ public class Respuesta implements Serializable{
         return pregunta;
     }
 
+    @JsonProperty
     public void setReporte(Reporte reporte) {
         this.reporte = reporte;
     }

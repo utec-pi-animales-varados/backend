@@ -11,7 +11,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "reporte")
-@JsonIgnoreProperties({"hibernateLazyInitialize", "handler"})
 public class Reporte implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -37,7 +36,6 @@ public class Reporte implements Serializable{
     private String comment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
@@ -45,8 +43,7 @@ public class Reporte implements Serializable{
     @JoinColumn(name = "animal_id", nullable = false)
     private Animal animal;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "reporte", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "reporte", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Respuesta> respuestas = new HashSet<>();
 
     public Reporte(Date date, Double latitude, Double longitude, String urlPicture, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
