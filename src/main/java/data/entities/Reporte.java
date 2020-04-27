@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,32 +16,35 @@ public class Reporte implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "reporte_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     private Date date;
 
-    @Column(name = "latitude")
+    @Column(name = "latitude", nullable = false)
     private Double latitude;
 
-    @Column(name = "longitude")
+    @Column(name = "longitude", nullable = false)
     private Double longitude;
 
-    @Column(name = "urlPicture")
+    @Column(name = "urlPicture", nullable = false)
     private String urlPicture;
 
     @Column(name = "comment")
     private String comment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
+
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "animal_id")
+    @JoinColumn(name = "animal_id", nullable = false)
     private Animal animal;
 
     @JsonIgnore
@@ -60,8 +62,7 @@ public class Reporte implements Serializable{
         this.respuestas = respuestas;
     }
 
-    public Reporte() {
-    }
+    public Reporte() {}
 
     public Set<Respuesta> getRespuestas() {
         return respuestas;
@@ -71,22 +72,6 @@ public class Reporte implements Serializable{
         this.respuestas = respuestas;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
-    }
-
-    public Animal getAnimal() {
-        return animal;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     public Long getId() {
         return id;
     }
@@ -94,7 +79,7 @@ public class Reporte implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
-
+  
     public Date getDate() {
         return date;
     }
@@ -134,4 +119,21 @@ public class Reporte implements Serializable{
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
 }

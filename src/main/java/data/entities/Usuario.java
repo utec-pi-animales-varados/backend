@@ -7,9 +7,7 @@ import com.google.common.hash.Hashing;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,16 +22,16 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "lastName")
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "telephone")
@@ -43,7 +41,7 @@ public class Usuario implements Serializable {
     private String mobilePhone;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Reporte> reportes = new HashSet<>();
 
     public Usuario() {
@@ -127,5 +125,11 @@ public class Usuario implements Serializable {
         return this.password.equals(Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString());
     }
 
+    public Set<Reporte> getReportes() {
+        return reportes;
+    }
 
+    public void setReportes(Set<Reporte> reportes) {
+        this.reportes = reportes;
+    }
 }

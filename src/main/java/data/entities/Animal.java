@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -33,6 +31,7 @@ public class Animal implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
     private Set<Reporte>  reportes = new HashSet<>();
 
     public Animal() {
@@ -84,4 +83,13 @@ public class Animal implements Serializable {
     public void setPeso(Double peso) {
         this.peso = peso;
     }
+
+    public Set<Reporte> getReportes() {
+        return reportes;
+    }
+
+    public void setReportes(Set<Reporte> reportes) {
+        this.reportes = reportes;
+    }
+
 }
