@@ -1,53 +1,76 @@
 package data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "reporte")
-public class Reporte implements Serializable {
+@JsonIgnoreProperties({"hibernateLazyInitialize", "handler"})
+public class Reporte implements Serializable{
+
+    private static final long serialVersionUID = 1L;
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "reporte_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "date", nullable = false)
     private Date date;
 
-    @Column(nullable = false)
+    @Column(name = "latitude", nullable = false)
     private Double latitude;
 
-    @Column(nullable = false)
+    @Column(name = "longitude", nullable = false)
     private Double longitude;
 
-    @Column(nullable = false)
+    @Column(name = "urlPicture", nullable = false)
     private String urlPicture;
 
-    @Column
+    @Column(name = "comment")
     private String comment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuarioId", nullable = false)
+
+    @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "animalId", nullable = false)
+    @JoinColumn(name = "animal_id", nullable = false)
     private Animal animal;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "reporte", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Respuesta> respuestas = new HashSet<>();
+
+    public Reporte(Date date, Double latitude, Double longitude, String urlPicture, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
+        this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.urlPicture = urlPicture;
+        this.comment = comment;
+        this.usuario = usuario;
+        this.animal = animal;
+        this.respuestas = respuestas;
+    }
+
     public Reporte() {}
+
+    public Set<Respuesta> getRespuestas() {
+        return respuestas;
+    }
+
+    public void setRespuestas(Set<Respuesta> respuestas) {
+        this.respuestas = respuestas;
+    }
 
     public Long getId() {
         return id;
@@ -56,7 +79,7 @@ public class Reporte implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
+  
     public Date getDate() {
         return date;
     }

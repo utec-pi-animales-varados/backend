@@ -1,6 +1,5 @@
 package business;
 
-import controller.UsuarioNotFoundException;
 import data.entities.Usuario;
 import data.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,9 @@ public class UsuarioService {
             usuario.setLastName(newUsuario.getLastName());
             usuario.setEmail(newUsuario.getEmail());
             usuario.setPassword(newUsuario.getPassword());
-            usuario.setReportes(newUsuario.getReportes());
             usuario.setTelephone(newUsuario.getTelephone());
             usuario.setMobilePhone(newUsuario.getMobilePhone());
+            usuario.setReportes(newUsuario.getReportes());
             return repository.save(usuario);
         }).orElseGet(()->{
             newUsuario.setId(id);
