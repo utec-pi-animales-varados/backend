@@ -1,47 +1,54 @@
 package data.entities;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table (name = "animal")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Animal implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
+    @Column(name = "animal_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, targetEntity = Reporte.class)
-    @JoinColumn(name = "id_report")
-    private Set<Reporte> reports = new HashSet<>();
-
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "color")
     private String color;
 
-    @Column
+    @Column(name = "peso")
     private Double peso;
 
-    public Animal(Set<Reporte> reports, String name, String color, double peso) {
-        this.reports = reports;
+    @JsonIgnore
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Reporte>  reportes = new HashSet<>();
+
+    public Animal() {
+    }
+
+    public Animal(String name, String color, Double peso, Set<Reporte> reportes) {
         this.name = name;
         this.color = color;
         this.peso = peso;
+        this.reportes = reportes;
     }
 
-    public Animal() {
+    public Set<Reporte> getReportes() {
+        return reportes;
+    }
+
+    public void setReportes(Set<Reporte> reportes) {
+        this.reportes = reportes;
     }
 
     public Long getId() {
@@ -50,14 +57,6 @@ public class Animal implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Set<Reporte> getReports() {
-        return reports;
-    }
-
-    public void setReports(Set<Reporte> reports) {
-        this.reports = reports;
     }
 
     public String getName() {
@@ -83,4 +82,5 @@ public class Animal implements Serializable {
     public void setPeso(Double peso) {
         this.peso = peso;
     }
+
 }
