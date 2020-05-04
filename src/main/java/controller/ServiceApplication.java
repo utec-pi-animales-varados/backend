@@ -1,5 +1,6 @@
 package controller;
 
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -15,7 +16,7 @@ import org.slf4j.LoggerFactory;
 @ComponentScan({"controller", "business" })
 @EntityScan("data")
 @EnableJpaRepositories("data.repositories")
-public class ServiceApplication implements WebMvcConfigurer {
+public class ServiceApplication extends SpringBootServletInitializer implements WebMvcConfigurer {
 
     public static void main(String[] args) {
         SpringApplication.run(ServiceApplication.class, args);
