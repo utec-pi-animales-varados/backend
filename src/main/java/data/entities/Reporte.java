@@ -1,17 +1,16 @@
 package data.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "reporte")
-public class Reporte implements Serializable{
+public class Reporte implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,8 +28,9 @@ public class Reporte implements Serializable{
     @Column(name = "longitude", nullable = false)
     private Double longitude;
 
+    @ElementCollection
     @Column(name = "urlPicture", nullable = false)
-    private String urlPicture;
+    private List<String> urlPicture = new ArrayList<>();
 
     @Column(name = "comment")
     private String comment;
@@ -46,7 +46,7 @@ public class Reporte implements Serializable{
     @OneToMany(mappedBy = "reporte", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Respuesta> respuestas = new HashSet<>();
 
-    public Reporte(Date date, Double latitude, Double longitude, String urlPicture, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
+    public Reporte(Date date, Double latitude, Double longitude, List<String> urlPicture, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -74,7 +74,7 @@ public class Reporte implements Serializable{
     public void setId(Long id) {
         this.id = id;
     }
-  
+
     public Date getDate() {
         return date;
     }
@@ -99,11 +99,11 @@ public class Reporte implements Serializable{
         this.longitude = longitude;
     }
 
-    public String getUrlPicture() {
+    public List<String> getUrlPicture() {
         return urlPicture;
     }
 
-    public void setUrlPicture(String urlPicture) {
+    public void setUrlPicture(List<String> urlPicture) {
         this.urlPicture = urlPicture;
     }
 
