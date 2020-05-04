@@ -30,7 +30,7 @@ public class Animal implements Serializable {
     private Double peso;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Reporte>  reportes = new HashSet<>();
 
     public Animal() {
@@ -75,7 +75,7 @@ public class Animal implements Serializable {
         this.color = color;
     }
 
-    public double getPeso() {
+    public Double getPeso() {
         return peso;
     }
 
