@@ -29,8 +29,8 @@ public class Reporte implements Serializable {
     private Double longitude;
 
     @ElementCollection
-    @Column(name = "urlPicture", nullable = false)
-    private List<String> urlPicture = new ArrayList<>();
+    @Column(name = "picturesURLs", nullable = false)
+    private List<String> picturesURLs = new ArrayList<>();
 
     @Column(name = "comment")
     private String comment;
@@ -46,11 +46,11 @@ public class Reporte implements Serializable {
     @OneToMany(mappedBy = "reporte", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Respuesta> respuestas = new HashSet<>();
 
-    public Reporte(Date date, Double latitude, Double longitude, List<String> urlPicture, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
+    public Reporte(Date date, Double latitude, Double longitude, List<String> picturesURLs, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.urlPicture = urlPicture;
+        this.picturesURLs = picturesURLs;
         this.comment = comment;
         this.usuario = usuario;
         this.animal = animal;
@@ -99,12 +99,12 @@ public class Reporte implements Serializable {
         this.longitude = longitude;
     }
 
-    public List<String> getUrlPicture() {
-        return urlPicture;
+    public List<String> getPicturesURLs() {
+        return picturesURLs;
     }
 
-    public void setUrlPicture(List<String> urlPicture) {
-        this.urlPicture = urlPicture;
+    public void setPicturesURLs(List<String> urlPicture) {
+        this.picturesURLs = urlPicture;
     }
 
     public String getComment() {
