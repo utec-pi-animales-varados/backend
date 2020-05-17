@@ -3,10 +3,8 @@ package controller;
 
 import business.ReporteService;
 import data.entities.Reporte;
-import data.repositories.ReporteRepository;
+import data.entities.Respuesta;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/reportes")
@@ -33,7 +32,18 @@ public class ReporteController {
 
     @PostMapping
     Reporte newReporte(@RequestBody Reporte newReporte) {
-        return service.create(newReporte);
+        service.create(newReporte);
+        Set<Respuesta> respuestas = newReporte.getRespuestas();
+
+        for (Respuesta respuesta: respuestas) {
+            respuesta.setReporte(newReporte);
+        }
+
+        newReporte.setRespuestas(respuestas);
+
+        service.update(newReporte, newReporte.getId());
+
+        return newReporte;
     }
 
     @GetMapping("/{id}")
