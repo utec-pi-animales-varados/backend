@@ -46,7 +46,10 @@ public class Reporte implements Serializable {
     @OneToMany(mappedBy = "reporte", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Respuesta> respuestas = new HashSet<>();
 
-    public Reporte(Date date, Double latitude, Double longitude, List<String> picturesURLs, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
+    @Column(name = "animal_longitud", nullable = false)
+    private Double longitud;
+
+    public Reporte(Date date, Double longitud, Double latitude, Double longitude, List<String> picturesURLs, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -54,10 +57,19 @@ public class Reporte implements Serializable {
         this.comment = comment;
         this.usuario = usuario;
         this.animal = animal;
+        this.longitud = longitud;
         this.respuestas = respuestas;
     }
 
     public Reporte() {}
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
 
     public Set<Respuesta> getRespuestas() {
         return respuestas;

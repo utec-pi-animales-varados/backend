@@ -26,9 +26,6 @@ public class Animal implements Serializable {
     @Column(name = "color")
     private String color;
 
-    @Column(name = "peso")
-    private Double peso;
-
     @JsonIgnore
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Reporte>  reportes = new HashSet<>();
@@ -36,10 +33,9 @@ public class Animal implements Serializable {
     public Animal() {
     }
 
-    public Animal(String name, String color, Double peso, Set<Reporte> reportes) {
+    public Animal(String name, String color, Set<Reporte> reportes) {
         this.name = name;
         this.color = color;
-        this.peso = peso;
         this.reportes = reportes;
     }
 
@@ -73,14 +69,6 @@ public class Animal implements Serializable {
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public Double getPeso() {
-        return peso;
-    }
-
-    public void setPeso(Double peso) {
-        this.peso = peso;
     }
 
 }
