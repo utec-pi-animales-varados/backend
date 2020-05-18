@@ -3,6 +3,7 @@ package data.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +21,7 @@ public class Reporte implements Serializable {
     private Long id;
 
     @Column(name = "date", nullable = false)
-    private Date date;
+    private Timestamp date;
 
     @Column(name = "latitude", nullable = false)
     private Double latitude;
@@ -49,7 +50,7 @@ public class Reporte implements Serializable {
     @Column(name = "animal_longitud", nullable = false)
     private Double longitud;
 
-    public Reporte(Date date, Double longitud, Double latitude, Double longitude, List<String> picturesURLs, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
+    public Reporte(Timestamp date, Double longitud, Double latitude, Double longitude, List<String> picturesURLs, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -87,11 +88,11 @@ public class Reporte implements Serializable {
         this.id = id;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
