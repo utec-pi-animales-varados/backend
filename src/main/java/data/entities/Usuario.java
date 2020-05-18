@@ -2,6 +2,7 @@ package data.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.hash.Hashing;
 
 import javax.persistence.*;
@@ -89,10 +90,12 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
     }
