@@ -23,16 +23,19 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "device_id", nullable = false)
+    private String deviceId;
+
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Column(name = "telephone")
@@ -48,14 +51,23 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
-    public Usuario(String name, String lastName, String email, String password, String telephone, String mobilePhone, Set<Reporte> reportes) {
+    public Usuario(String name, String device_id, String lastName, String email, String password, String telephone, String mobilePhone, Set<Reporte> reportes) {
         this.name = name;
+        this.deviceId = device_id;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.telephone = telephone;
         this.mobilePhone = mobilePhone;
         this.reportes = reportes;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String device_id) {
+        this.deviceId = device_id;
     }
 
     public Long getId() {

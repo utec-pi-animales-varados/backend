@@ -36,6 +36,7 @@ public class UsuarioService {
             usuario.setTelephone(newUsuario.getTelephone());
             usuario.setMobilePhone(newUsuario.getMobilePhone());
             usuario.setReportes(newUsuario.getReportes());
+            usuario.setDeviceId((newUsuario.getDeviceId()));
             return repository.save(usuario);
         }).orElseGet(()->{
             newUsuario.setId(id);
