@@ -48,7 +48,7 @@ public class Reporte implements Serializable {
     private Set<Respuesta> respuestas = new HashSet<>();
 
     @Column(name = "animal_longitud", nullable = false)
-    private Double longitud;
+    private Double longitudAnimal;
 
     public Reporte(Timestamp date, Double longitud, Double latitude, Double longitude, List<String> picturesURLs, String comment, Usuario usuario, Animal animal, Set<Respuesta> respuestas) {
         this.date = date;
@@ -58,18 +58,18 @@ public class Reporte implements Serializable {
         this.comment = comment;
         this.usuario = usuario;
         this.animal = animal;
-        this.longitud = longitud;
+        this.longitudAnimal = longitud;
         this.respuestas = respuestas;
     }
 
     public Reporte() {}
 
-    public void setLongitud(Double longitud) {
-        this.longitud = longitud;
+    public void setLongitudAnimal(Double longitud) {
+        this.longitudAnimal = longitud;
     }
 
-    public Double getLongitud() {
-        return longitud;
+    public Double getLongitudAnimal() {
+        return longitudAnimal;
     }
 
     public Set<Respuesta> getRespuestas() {
