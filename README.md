@@ -72,7 +72,7 @@ Para crear un reporte, deberás de tener un animal y una pregunta en la DB.
 *JSON Body*:
 ```JSON
 {
-	"date":"2000-10-10",
+	"date":"2020-05-18T16:04:49.122+0000",
 	"latitude":10.0,
 	"comment": "esto es un comentario",
 	"longitude":10.0,
