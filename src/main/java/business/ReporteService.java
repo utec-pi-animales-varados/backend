@@ -42,7 +42,7 @@ public class ReporteService {
             reporte.setAnimal(item.getAnimal());
             reporte.setUsuario(item.getUsuario());
             reporte.setRespuestas(item.getRespuestas());
-            reporte.setLongitud(item.getLongitud());
+            reporte.setLongitudAnimal(item.getLongitudAnimal());
             return repository.save(reporte);
         }).orElseGet(()->{
             item.setId(id);
