@@ -45,6 +45,11 @@ public class ReporteController {
         return newReporte;
     }
 
+    @GetMapping("/usuario/{id}")
+    public List<Reporte> reportsByUser(@PathVariable Long id) {
+        return service.findReportsByUser(id);
+    }
+
     @GetMapping("/{id}")
     public  Reporte one(@PathVariable Long id) {
         return service.findOne(id);
