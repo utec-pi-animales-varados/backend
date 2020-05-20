@@ -47,7 +47,9 @@ public class ReporteController {
 
     @GetMapping("/usuario/{id}")
     public List<Reporte> reportsByUser(@PathVariable Long id) {
-        return service.findReportsByUser(id);
+        List<Reporte> reportes = service.findAll();
+        reportes.removeIf(reporte -> !reporte.getUsuario().getId().equals(id));
+        return reportes;
     }
 
     @GetMapping("/{id}")

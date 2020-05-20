@@ -32,12 +32,6 @@ public class ReporteService {
         return repository.save(item);
     }
 
-    public List<Reporte> findReportsByUser(Long user_id) {
-        List<Reporte> reportes = findAll();
-        reportes.removeIf(reporte -> !reporte.getUsuario().getId().equals(user_id));
-        return reportes;
-    }
-
     public Reporte update(Reporte item, Long id){
         return repository.findById(id).map(reporte -> {
             reporte.setComment(item.getComment());
