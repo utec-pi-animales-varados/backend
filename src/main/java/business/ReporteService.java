@@ -24,6 +24,14 @@ public class ReporteService {
         return items;
     }
 
+    public List<Reporte> findReportsByUserID(Long user_id) {
+        List<Reporte> reportes = new ArrayList<>();
+        for (Reporte reporte : repository.findAll())
+            if (reporte.getUsuario().getId().equals(user_id))
+                reportes.add(reporte);
+        return reportes;
+    }
+
     public Reporte findOne(Long id){
         return repository.findById(id).orElseThrow(()->new ReporteNotFoundException(id));
     }

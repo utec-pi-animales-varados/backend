@@ -1,20 +1,27 @@
 package controller.config.jwtApi;
 
 import business.UsuarioService;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import controller.config.util.JwtUtil;
 import models.AuthenticationRequest;
 import models.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collections;
+import java.util.HashMap;
 
 
 @RestController
@@ -40,13 +47,15 @@ class JwtSecurityConfig {
 
         @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
         public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-
-            if(service.findByUsernameAndPassword(authenticationRequest.getUsername(),authenticationRequest.getPassword())) {
+            if (service.findByUsernameAndPassword(authenticationRequest.getUsername(), authenticationRequest.getPassword())) {
                 final UserDetails userDetails = userDetailsService
                         .loadUserByUsername(authenticationRequest.getUsername());
-
+                final Long user_id = service.findIDbyUsername(authenticationRequest.getUsername());
                 final String jwt = jwtTokenUtil.generateToken(userDetails);
-                return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.OK);
+                HashMap<String, String> map = new HashMap<>();
+                map.put("user_id", Long.toString(user_id));
+                map.put("jwt", jwt);
+                return new ResponseEntity<>(map, HttpStatus.OK);
             }else{
                 return new ResponseEntity<>("Usuario o contraseña invalida", HttpStatus.BAD_REQUEST);
             }
