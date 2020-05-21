@@ -2,17 +2,12 @@ package controller;
 
 
 import business.ReporteService;
-import business.UploadImagenService;
 import data.entities.Reporte;
 import data.entities.Respuesta;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import java.sql.Timestamp;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
@@ -31,6 +26,8 @@ public class ReporteController {
 
     @PostMapping
     Reporte newReporte(@RequestBody Reporte newReporte) {
+        newReporte.setDate(new Timestamp(System.currentTimeMillis()));
+
         service.create(newReporte);
         Set<Respuesta> respuestas = newReporte.getRespuestas();
 
@@ -40,8 +37,6 @@ public class ReporteController {
         newReporte.setRespuestas(respuestas);
 
         service.update(newReporte, newReporte.getId());
-
-        
 
         return newReporte;
     }
