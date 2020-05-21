@@ -56,8 +56,7 @@ class JwtSecurityConfig {
                 map.put("user_id", Long.toString(user_id));
                 map.put("jwt", jwt);
                 return new ResponseEntity<>(map, HttpStatus.OK);
-            }else{
-                return new ResponseEntity<>("Usuario o contraseña invalida", HttpStatus.BAD_REQUEST);
             }
+            return new ResponseEntity<>("Usuario o contraseña invalida", HttpStatus.BAD_REQUEST);
         }
 }

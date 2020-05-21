@@ -41,6 +41,8 @@ public class ReporteController {
 
         service.update(newReporte, newReporte.getId());
 
+        
+
         return newReporte;
     }
 
