@@ -2,6 +2,7 @@ package controller;
 
 
 import business.ReporteService;
+import data.dto.ReporteDTO;
 import data.entities.Reporte;
 import data.entities.Respuesta;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,9 @@ public class ReporteController {
     }
 
     @PostMapping
-    Reporte newReporte(@RequestBody Reporte newReporte) {
-        newReporte.setDate(new Timestamp(System.currentTimeMillis()));
-
-        service.create(newReporte);
+    Reporte newReporte(@RequestBody ReporteDTO reporteDTO) {
+        reporteDTO.setDate(new Timestamp(System.currentTimeMillis()));
+        Reporte newReporte = service.create(reporteDTO);
         Set<Respuesta> respuestas = newReporte.getRespuestas();
 
         for (Respuesta respuesta: respuestas)
