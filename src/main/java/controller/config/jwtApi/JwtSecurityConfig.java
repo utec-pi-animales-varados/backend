@@ -3,6 +3,8 @@ package controller.config.jwtApi;
 import business.UsuarioService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import controller.config.util.JwtUtil;
+import data.dto.AuthenticateDTO;
+import data.dto.ReporteDTO;
 import models.AuthenticationRequest;
 import models.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,11 +48,11 @@ class JwtSecurityConfig {
         private UsuarioService service;
 
         @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-        public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-            if (service.findByUsernameAndPassword(authenticationRequest.getUsername(), authenticationRequest.getPassword())) {
+        public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticateDTO authenticationRequest) throws Exception {
+            if (service.findByUsernameAndPassword(authenticationRequest.getEmail(), authenticationRequest.getPassword())) {
                 final UserDetails userDetails = userDetailsService
-                        .loadUserByUsername(authenticationRequest.getUsername());
-                final Long user_id = service.findIDbyUsername(authenticationRequest.getUsername());
+                        .loadUserByUsername(authenticationRequest.getEmail());
+                final Long user_id = service.findIDbyUsername(authenticationRequest.getEmail());
                 final String jwt = jwtTokenUtil.generateToken(userDetails);
                 HashMap<String, String> map = new HashMap<>();
                 map.put("user_id", Long.toString(user_id));
