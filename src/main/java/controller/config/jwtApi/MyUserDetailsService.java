@@ -1,5 +1,7 @@
 package controller.config.jwtApi;
 
+import business.UsuarioService;
+import data.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,9 +16,19 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private MyUserDetailsService myUserDetailsService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     @Override //Aca se puede implementar la busqueda en la base de datos
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        return new User("foo","foo", new ArrayList<>());
+        Usuario usuario = usuarioService.findById(usuarioService.findIDbyUsername(userName));
+        return new User(usuario.getEmail(), usuario.getPassword(), new ArrayList<>());
     }
+
+    public UserDetails loadUserByDeviceID(String deviceID) throws UsernameNotFoundException {
+        Usuario usuario = usuarioService.findById(usuarioService.findIDbyDeviceID(deviceID));
+        return new User("foo", "foo", new ArrayList<>());
+    }
+
 
 }
