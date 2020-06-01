@@ -1,28 +1,19 @@
 package controller.config.jwtApi;
 
 import business.UsuarioService;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import controller.config.util.JwtUtil;
 import data.dto.AuthenticateDTO;
-import data.dto.ReporteDTO;
-import models.AuthenticationRequest;
-import models.AuthenticationResponse;
+import data.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collections;
 import java.util.HashMap;
 
 
@@ -58,6 +49,20 @@ class JwtSecurityConfig {
                 map.put("user_id", Long.toString(user_id));
                 map.put("jwt", jwt);
                 return new ResponseEntity<>(map, HttpStatus.OK);
+            }
+            return new ResponseEntity<>("Usuario o contraseña invalida", HttpStatus.BAD_REQUEST);
+        }
+
+        @RequestMapping(value = "/authenticateGuest", method = RequestMethod.POST)
+        public ResponseEntity<?> createGuestAuthenticationToken(@RequestBody Usuario user) throws Exception {
+            if (service.deviceIdExists(user.getDeviceId())) {
+                final UserDetails userDetails = userDetailsService.loadUserByDeviceID(user.getDeviceId());
+                final Long user_id = service.findIDbyDeviceID(user.getDeviceId());
+                final String jwt = jwtTokenUtil.generateToken(userDetails);
+                HashMap<String, String> map = new HashMap<>();
+                map.put("user_id", Long.toString(user_id));
+                map.put("jwt", jwt);
+                return  new ResponseEntity<>(map, HttpStatus.OK);
             }
             return new ResponseEntity<>("Usuario o contraseña invalida", HttpStatus.BAD_REQUEST);
         }

@@ -64,4 +64,18 @@ public class UsuarioService {
         return null;
     }
 
+    public Boolean deviceIdExists(String deviceID) {
+        for (Usuario item : repository.findAll())
+            if (item.getDeviceId().equals(deviceID))
+                return true;
+        return false;
+    }
+
+    public Long findIDbyDeviceID(String devideID) {
+        for (Usuario item : repository.findAll())
+            if (item.getDeviceId().equals(devideID))
+                return item.getId();
+        return null;
+    }
+
 }

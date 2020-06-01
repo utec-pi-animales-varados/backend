@@ -13,6 +13,7 @@ Todas las rutas excepto */signup* y */authenticate* se encuentra protegidas por 
 *JSON Body*:  
 ```JSON
 {
+	"deviceId":"3a43ADF",
 	"name":"Christian",
 	"lastName":"Ledgard",
 	"email":"christian",
@@ -22,7 +23,7 @@ Todas las rutas excepto */signup* y */authenticate* se encuentra protegidas por 
 }
 ```
 
-> Los campos telephone y mobilephone son opcionales
+> Todos los campos menos deviceId son opcionales.
 
 ## Authenticate
 
@@ -31,11 +32,23 @@ Todas las rutas excepto */signup* y */authenticate* se encuentra protegidas por 
 *JSON Body*:
 ```JSON
 {
-	"username":"christian",
+	"email":"christian",
 	"password":"123"
 }
 ```
-La acción retornara un *JSONwebToken* con el que podran continuar su interración con el Backend.
+La acción retornara el usuarioId y un *JSONwebToken* con el que podrán continuar su interacción con el Backend.
+
+## Authenticate Guest
+
+*Ruta*: [/authenticateGuest](http://107.180.91.147:8080/animales_varados-0.1/authenticateGuest)  
+*Método*: `POST`  
+*JSON Body*:
+```JSON
+{
+	"deviceId":"asva123s"
+}
+```
+La acción retornara el usuarioId y un *JSONwebToken* con el que podrán continuar su interacción con el Backend.
 
 ## Animal
 
@@ -45,10 +58,27 @@ La acción retornara un *JSONwebToken* con el que podran continuar su interraci�
 ```JSON
 {
 	"name": "lobo marino",
-	"color": "gris",
-	"peso": "200"
+	"color": "gris"
 }
 ```
+
+*Ruta*: [/animales](http://107.180.91.147:8080/animales_varados-0.1/animales)  
+*Método*: `GET`  
+> Retornara un JSON con la lista de todos los animales actualmente registrados.
+
+*Ruta*: [/animales/{id}](http://107.180.91.147:8080/animales_varados-0.1/animales/{id})  
+*Método*: `PUT`  
+*JSON Body*:
+```JSON
+{
+	"name": "lobo marino",
+	"color": "gris"
+}
+```
+
+*Ruta*: [/animales/{id}](http://107.180.91.147:8080/animales_varados-0.1/animales/{id})  
+*Método*: `GET`  
+> Retornara un JSON con los datos de un animal en especifico.
 
 ## Pregunta
 Para crear una pregunta, debes tener el texto de la pregunta.
