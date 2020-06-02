@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 
 @Service
 @Transactional
-public class UploadImagenService {
+public class ImageService {
 
     public Path createCouponPost(MultipartFile file) throws IOException {
         String extension = getExtension(file.getOriginalFilename());
