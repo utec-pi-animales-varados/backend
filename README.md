@@ -36,7 +36,7 @@ Todas las rutas excepto */signup* y */authenticate* se encuentra protegidas por 
 	"password":"123"
 }
 ```
-La acción retornara el usuarioId y un *JSONwebToken* con el que podrán continuar su interacción con el Backend.
+> La acción retornara el usuarioId y un *JSONwebToken* con el que podrán continuar su interacción con el Backend.
 
 ## Authenticate Guest
 
@@ -48,7 +48,7 @@ La acción retornara el usuarioId y un *JSONwebToken* con el que podrán continu
 	"deviceId":"asva123s"
 }
 ```
-La acción retornara el usuarioId y un *JSONwebToken* con el que podrán continuar su interacción con el Backend.
+> La acción retornara el usuarioId y un *JSONwebToken* con el que podrán continuar su interacción con el Backend.
 
 ## Animal
 
@@ -80,19 +80,39 @@ La acción retornara el usuarioId y un *JSONwebToken* con el que podrán continu
 *Método*: `GET`  
 > Retornara un JSON con los datos de un animal en especifico.
 
+*Ruta*: [/animales/{id}](http://107.180.91.147:8080/animales_varados-0.1/animales/{id})  
+*Método*: `DELETE`  
+> Borra el animal con el id de la ruta.
+
 ## Pregunta
-Para crear una pregunta, debes tener el texto de la pregunta.
 
 *Ruta*: [/preguntas](http://107.180.91.147:8080/animales_varados-0.1/preguntas)  
 *Método*: `POST`  
 *JSON Body*:
 ```JSON
 {
-	"name": "lobo marino",
-	"color": "gris",
-	"peso": "200"
+	"texto": "¿esto es una pregunta?"
 }
 ```
+
+*Ruta*: [/preguntas](http://107.180.91.147:8080/animales_varados-0.1/preguntas)  
+*Método*: `GET`
+> Retorna todas las preguntas.
+
+*Ruta*: [/preguntas](http://107.180.91.147:8080/animales_varados-0.1/preguntas/{id})  
+*Método*: `GET`
+> Retorna la pregunta con el id de la ruta.
+
+*Ruta*: [/preguntas](http://107.180.91.147:8080/animales_varados-0.1/preguntas/{id})  
+*Método*: `PUT`  
+*JSON Body*:
+```JSON
+{
+	"texto": "¿esto es una pregunta?"
+}
+```
+*Ruta*: [/preguntas](http://107.180.91.147:8080/animales_varados-0.1/preguntas/{id})  
+*Método*: `DELETE`
 
 ## Reporte
 Para crear un reporte, deberás de tener un animal y una pregunta en la DB.
@@ -138,5 +158,16 @@ Para crear un reporte, deberás de tener un animal y una pregunta en la DB.
     ]
 }
 ```
-
 > El campo comentario es opcional.
+
+*Ruta*: [/reportes](http://107.180.91.147:8080/animales_varados-0.1/reportes/{id})  
+*Método*: `GET`
+
+*Ruta*: [/reportes](http://107.180.91.147:8080/animales_varados-0.1/reportes/usuario/{id})  
+*Método*: `GET`
+
+*Ruta*: [/reportes](http://107.180.91.147:8080/animales_varados-0.1/reportes/{id})  
+*Método*: `PUT`
+
+*Ruta*: [/reportes](http://107.180.91.147:8080/animales_varados-0.1/reportes/{id})  
+*Método*: `DELETE`
