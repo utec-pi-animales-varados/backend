@@ -44,9 +44,14 @@ public class UsuarioService {
         });
     }
 
-    public void deleteById(Long id){
-        repository.deleteById(id);
+    public void changePassword(String newPassword, Long id){
+        repository.findById(id).map(usuario -> {
+            usuario.setPassword(newPassword);
+            return repository.save(usuario);
+        });
     }
+
+    public void deleteById(Long id){ repository.deleteById(id); }
 
     public Boolean findByUsernameAndPassword(String email, String password){
         for(Usuario item : repository.findAll()){
@@ -59,7 +64,7 @@ public class UsuarioService {
 
     public Long findIDbyUsername(String email) {
         for (Usuario item : repository.findAll())
-            if (item.getEmail().equals(email))
+            if (item.getEmail() != null && item.getEmail().equals(email))
                 return item.getId();
         return null;
     }
