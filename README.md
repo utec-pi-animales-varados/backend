@@ -99,11 +99,11 @@ Todas las rutas excepto */signup* y */authenticate* se encuentra protegidas por 
 *Método*: `GET`
 > Retorna todas las preguntas.
 
-*Ruta*: [/preguntas](http://107.180.91.147:8080/animales_varados-0.1/preguntas/{id})  
+*Ruta*: [/preguntas/{id}](http://107.180.91.147:8080/animales_varados-0.1/preguntas/{id})  
 *Método*: `GET`
 > Retorna la pregunta con el id de la ruta.
 
-*Ruta*: [/preguntas](http://107.180.91.147:8080/animales_varados-0.1/preguntas/{id})  
+*Ruta*: [/preguntas/{id}](http://107.180.91.147:8080/animales_varados-0.1/preguntas/{id})  
 *Método*: `PUT`  
 *JSON Body*:
 ```JSON
@@ -111,7 +111,7 @@ Todas las rutas excepto */signup* y */authenticate* se encuentra protegidas por 
 	"texto": "¿esto es una pregunta?"
 }
 ```
-*Ruta*: [/preguntas](http://107.180.91.147:8080/animales_varados-0.1/preguntas/{id})  
+*Ruta*: [/preguntas/{id}](http://107.180.91.147:8080/animales_varados-0.1/preguntas/{id})  
 *Método*: `DELETE`
 
 ## Reporte
@@ -160,14 +160,33 @@ Para crear un reporte, deberás de tener un animal y una pregunta en la DB.
 ```
 > El campo comentario es opcional.
 
-*Ruta*: [/reportes](http://107.180.91.147:8080/animales_varados-0.1/reportes/{id})  
+*Ruta*: [/reportes/{id}](http://107.180.91.147:8080/animales_varados-0.1/reportes/{id})  
 *Método*: `GET`
 
-*Ruta*: [/reportes](http://107.180.91.147:8080/animales_varados-0.1/reportes/usuario/{id})  
+*Ruta*: [/reportes/usuario/{id}](http://107.180.91.147:8080/animales_varados-0.1/reportes/usuario/{id})  
 *Método*: `GET`
 
-*Ruta*: [/reportes](http://107.180.91.147:8080/animales_varados-0.1/reportes/{id})  
+*Ruta*: [/reportes/{id}](http://107.180.91.147:8080/animales_varados-0.1/reportes/{id})  
 *Método*: `PUT`
 
-*Ruta*: [/reportes](http://107.180.91.147:8080/animales_varados-0.1/reportes/{id})  
+*Ruta*: [/reportes/{id}](http://107.180.91.147:8080/animales_varados-0.1/reportes/{id})  
 *Método*: `DELETE`
+
+## Imagen
+
+*Ruta*: [/imagen](http://107.180.91.147:8080/animales_varados-0.1/imagen)  
+*Método*: `POST`
+Enviar un Body de tipo **form-data**:
+```
+key: image
+value: (select file)
+```
+
+
+*Ruta*: [/imagen](http://107.180.91.147:8080/animales_varados-0.1/imagen)  
+*Método*: `GET`
+Enviar un Body de tipo **form-data**:
+```
+key: path
+value: LLK9PSQ0F3XF1L4D4V0QW5A65F5O85.png
+```
