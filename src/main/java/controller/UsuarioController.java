@@ -1,8 +1,10 @@
 package controller;
 
 import business.UsuarioService;
+import data.dto.ChangePasswordDTO;
 import data.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,4 +50,15 @@ public class UsuarioController {
         service.deleteById(id);
     }
 
+    @PutMapping("/changePassword/{id}")
+    public Boolean changePassword(@PathVariable Long id, @RequestBody ChangePasswordDTO changePasswordDTO) {
+        Usuario usuario = service.findById(id);
+        Boolean passwordIsCorrect = service.findByUsernameAndPassword(usuario.getEmail(), changePasswordDTO.getOldPassword());
+        if (passwordIsCorrect) {
+            service.changePassword(changePasswordDTO.getNewPassword(), id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

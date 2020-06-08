@@ -50,7 +50,6 @@ public class ImageController {
 
         switch(extension) {
             case ".jpg":
-                return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(img);
             case ".jpeg":
                 return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(img);
             case ".gif":

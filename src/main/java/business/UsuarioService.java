@@ -44,6 +44,13 @@ public class UsuarioService {
         });
     }
 
+    public void changePassword(String newPassword, Long id){
+        repository.findById(id).map(usuario -> {
+            usuario.setPassword(newPassword);
+            return repository.save(usuario);
+        });
+    }
+
     public void deleteById(Long id){
         repository.deleteById(id);
     }
