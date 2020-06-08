@@ -1,5 +1,6 @@
 package controller.config.util;
 
+import data.entities.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -42,6 +43,11 @@ public class JwtUtil {
     public String generateToken(UserDetails userDetails){
         Map<String,Object> claims = new HashMap<>();
         return createToken(claims, userDetails.getUsername());
+    }
+
+    public String generateAnonymousToken(Usuario usuario){
+        Map<String,Object> claims = new HashMap<>();
+        return createToken(claims, usuario.getDeviceId());
     }
 
     private String createToken(Map<String,Object> claims, String subject){

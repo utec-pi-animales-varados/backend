@@ -59,7 +59,7 @@ public class UsuarioService {
 
     public Long findIDbyUsername(String email) {
         for (Usuario item : repository.findAll())
-            if (item.getEmail().equals(email))
+            if (item.getEmail() != null && item.getEmail().equals(email))
                 return item.getId();
         return null;
     }

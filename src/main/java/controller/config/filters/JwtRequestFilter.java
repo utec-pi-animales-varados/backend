@@ -2,10 +2,13 @@ package controller.config.filters;
 
 
 import controller.config.jwtApi.MyUserDetailsService;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -41,9 +44,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
 
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (username != null && !username.equals("null") && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = null;
+            try{
+                userDetails = this.userDetailsService.loadUserByUsername(username);
+            }catch (UsernameNotFoundException e){
 
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+                try{
+                    userDetails = this.userDetailsService.loadUserByDeviceID(username);
+                }catch (UsernameNotFoundException ee){
+                    throw new UsernameNotFoundException("Error Autentificación");
+                }
+
+            }
 
             if (jwtUtil.validateToken(jwt, userDetails)) {
 
@@ -53,6 +66,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                         .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
             }
+
         }
         chain.doFilter(request, response);
     }

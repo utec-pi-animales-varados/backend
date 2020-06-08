@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 
 @RestController
-class JwtSecurityConfig {
+class JwtSecurityConfig{
 
         @Autowired
         private AuthenticationManager authenticationManager;
@@ -58,11 +58,11 @@ class JwtSecurityConfig {
             if (service.deviceIdExists(user.getDeviceId())) {
                 final UserDetails userDetails = userDetailsService.loadUserByDeviceID(user.getDeviceId());
                 final Long user_id = service.findIDbyDeviceID(user.getDeviceId());
-                final String jwt = jwtTokenUtil.generateToken(userDetails);
+                final String jwt = jwtTokenUtil.generateAnonymousToken(user);
                 HashMap<String, String> map = new HashMap<>();
                 map.put("user_id", Long.toString(user_id));
                 map.put("jwt", jwt);
-                return  new ResponseEntity<>(map, HttpStatus.OK);
+                return new ResponseEntity<>(map, HttpStatus.OK);
             }
             return new ResponseEntity<>("Usuario o contraseña invalida", HttpStatus.BAD_REQUEST);
         }
