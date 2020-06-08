@@ -44,9 +44,7 @@ public class UsuarioService {
         });
     }
 
-    public void deleteById(Long id){
-        repository.deleteById(id);
-    }
+    public void deleteById(Long id){ repository.deleteById(id); }
 
     public Boolean findByUsernameAndPassword(String email, String password){
         for(Usuario item : repository.findAll()){

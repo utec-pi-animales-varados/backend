@@ -56,7 +56,6 @@ class JwtSecurityConfig{
         @RequestMapping(value = "/authenticateGuest", method = RequestMethod.POST)
         public ResponseEntity<?> createGuestAuthenticationToken(@RequestBody Usuario user) throws Exception {
             if (service.deviceIdExists(user.getDeviceId())) {
-                final UserDetails userDetails = userDetailsService.loadUserByDeviceID(user.getDeviceId());
                 final Long user_id = service.findIDbyDeviceID(user.getDeviceId());
                 final String jwt = jwtTokenUtil.generateAnonymousToken(user);
                 HashMap<String, String> map = new HashMap<>();
@@ -64,6 +63,6 @@ class JwtSecurityConfig{
                 map.put("jwt", jwt);
                 return new ResponseEntity<>(map, HttpStatus.OK);
             }
-            return new ResponseEntity<>("Usuario o contraseña invalida", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("User ID invalido", HttpStatus.BAD_REQUEST);
         }
 }
