@@ -122,20 +122,16 @@ Para crear un reporte, deberás de tener un animal y una pregunta en la DB.
 *JSON Body*:
 ```JSON
 {
-	"date":"2020-05-18T16:04:49.122+0000",
+	"date":"2000-10-10",
 	"latitude":10.0,
-	"comment": "esto es un comentario",
 	"longitude":10.0,
 	"picturesURLs": [
 		"google.com",
 		"unaimagen.com"
 		],
-	"animal":{
-		"id":1
-	},
-	"usuario":{
-		"id":1
-	},
+	"animalid": 1,
+    "usuarioid": 1,
+    "longitudAnimal": 10,
 	"respuestas": [
             {
                 "textoRespuesta": "esto es una respuesta con otro id nueva",
@@ -155,7 +151,7 @@ Para crear un reporte, deberás de tener un animal y una pregunta en la DB.
                     "id": 1
                 }
             }
-    ]
+        ]
 }
 ```
 > El campo comentario es opcional.
