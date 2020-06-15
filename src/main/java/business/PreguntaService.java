@@ -31,6 +31,7 @@ public class PreguntaService {
         return repository.findById(id).map(pregunta -> {
             pregunta.setTexto(newPregunta.getTexto());
             pregunta.setRespuestas(newPregunta.getRespuestas());
+            pregunta.setPrioridad(newPregunta.getPrioridad());
             return repository.save(pregunta);
         }).orElseGet(() -> {
             newPregunta.setId(id);
