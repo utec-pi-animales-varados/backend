@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,7 +23,7 @@ public class Pregunta implements Serializable{
     private String texto;
 
     @Column(name = "prioridad", unique=true)
-    private Long prioridad;
+    private Short prioridad;
 
     @JsonIgnore
     @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -33,7 +32,7 @@ public class Pregunta implements Serializable{
     public Pregunta() {
     }
 
-    public Pregunta(Long id, String texto, Long prioridad, Set<Respuesta> respuestas) {
+    public Pregunta(Long id, String texto, Short prioridad, Set<Respuesta> respuestas) {
         this.id = id;
         this.texto = texto;
         this.prioridad = prioridad;
@@ -60,11 +59,11 @@ public class Pregunta implements Serializable{
         this.id = id;
     }
 
-    public void setPrioridad(Long prioridad) {
+    public void setPrioridad(Short prioridad) {
         this.prioridad = prioridad;
     }
 
-    public Long getPrioridad() {
+    public Short getPrioridad() {
         return prioridad;
     }
 
