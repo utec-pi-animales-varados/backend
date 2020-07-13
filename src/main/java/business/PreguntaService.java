@@ -16,7 +16,7 @@ public class PreguntaService {
     private PreguntaRepository repository;
 
     public List<Pregunta> findAll() {
-        return repository.findAll();
+        return repository.findAllByOrderByPrioridadAsc();
     }
 
     public Pregunta save(Pregunta pregunta) {
