@@ -55,8 +55,10 @@ public class UsuarioService {
 
     public Boolean findByUsernameAndPassword(String email, String password){
         for(Usuario item : repository.findAll()){
-            if((item.getEmail().equals(email)) & (item.verifyPassword(password))){
-                return true;
+            if (item.getEmail() != null && item.getPassword() != null) {
+                if((item.getEmail().equals(email)) && (item.verifyPassword(password))){
+                    return true;
+                }
             }
         }
         return false;
